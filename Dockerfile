@@ -1,6 +1,10 @@
 FROM mcr.microsoft.com/playwright:v1.48.0-jammy
 
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Copenhagen
+
 RUN apt-get update && apt-get install -y \
+    tzdata \
     php-cli \
     php-curl \
     && rm -rf /var/lib/apt/lists/*
