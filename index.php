@@ -23,11 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     $response = curl_exec($ch);
+    $curlErr = curl_error($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
     if ($response === false) {
-        $error = 'Kunne ikke forbinde til scraper-robotten.';
+        $error = 'Kunne ikke forbinde til scraper-robotten: ' . $curlErr;
     } else {
         $data = json_decode($response, true);
         if ($httpCode === 200 && !empty($data['success'])) {
